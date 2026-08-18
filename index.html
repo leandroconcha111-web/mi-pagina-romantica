@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Marilyn 💖</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, #fff 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 30%, #fff 0 2px, transparent 3px),
+        linear-gradient(135deg, #ffd6e7, #fff0f6 45%, #ffc5dc);
+      background-size: 180px 180px, 230px 230px, cover;
+      color: #9d174d;
+    }
+
+    .page {
+      width: min(1000px, 92%);
+      margin: auto;
+      padding: 45px 0 70px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bubble {
+      background: rgba(255,255,255,.86);
+      border: 3px solid #ff8fba;
+      border-radius: 35px;
+      padding: 24px 30px;
+      margin: 22px auto;
+      max-width: 850px;
+      box-shadow: 0 12px 30px rgba(190, 24, 93, .16);
+      position: relative;
+      animation: appear .8s ease both;
+    }
+
+    .bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 14%;
+      width: 28px;
+      height: 28px;
+      background: rgba(255,255,255,.86);
+      border-right: 3px solid #ff8fba;
+      border-bottom: 3px solid #ff8fba;
+      transform: rotate(45deg);
+    }
+
+    .bubble h2 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      color: #be185d;
+    }
+
+    .bubble p {
+      margin: 0;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .heart-card {
+      width: min(520px, 85vw);
+      aspect-ratio: 1 / .9;
+      margin: 45px auto 35px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      filter: drop-shadow(0 18px 25px rgba(190,24,93,.25));
+    }
+
+    .heart-card::before,
+    .heart-card::after {
+      content: "";
+      position: absolute;
+      width: 56%;
+      height: 56%;
+      top: 5%;
+      background: linear-gradient(145deg, #ff4f91, #d81b60);
+      border-radius: 50%;
+    }
+
+    .heart-card::before { left: 9%; }
+    .heart-card::after { right: 9%; }
+
+    .heart-shape {
+      position: absolute;
+      width: 72%;
+      height: 72%;
+      bottom: 5%;
+      background: linear-gradient(145deg, #ff4f91, #d81b60);
+      transform: rotate(45deg);
+      border-radius: 12%;
+    }
+
+    .heart-text {
+      position: relative;
+      z-index: 3;
+      color: white;
+      padding: 25px;
+      font-family: Georgia, serif;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: bold;
+      line-height: 1.2;
+      text-shadow: 0 3px 8px rgba(90,0,30,.35);
+    }
+
+    .question {
+      margin: 35px 0 20px;
+      font-family: Georgia, serif;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: #a30d50;
+      text-shadow: 0 4px 10px rgba(255,255,255,.9);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 25px 0 50px;
+      min-height: 80px;
+      position: relative;
+    }
+
+    button {
+      border: 0;
+      border-radius: 25px;
+      padding: 18px 55px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(157,23,77,.2);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    #yes {
+      background: linear-gradient(135deg, #ff4f91, #e11d68);
+      color: white;
+    }
+
+    #no {
+      background: white;
+      color: #be185d;
+      border: 2px solid #ff9fc2;
+    }
+
+    button:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 12px 25px rgba(157,23,77,.28);
+    }
+
+    #answer {
+      min-height: 42px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #be185d;
+    }
+
+    .floating {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      font-size: 28px;
+      animation: floatUp linear forwards;
+      opacity: .9;
+    }
+
+    .arrow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      font-size: 35px;
+      animation: arrowFly 4s linear forwards;
+    }
+
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      color: white;
+      animation: sparkle 2s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(30px) rotate(0deg) scale(.6); opacity: 0; }
+      15% { opacity: 1; }
+      to { transform: translateY(-110vh) rotate(360deg) scale(1.25); opacity: 0; }
+    }
+
+    @keyframes arrowFly {
+      from { transform: translateX(-20vw) rotate(-10deg); opacity: 0; }
+      15% { opacity: 1; }
+      to { transform: translateX(120vw) rotate(10deg); opacity: 0; }
+    }
+
+    @keyframes sparkle {
+      from { transform: scale(.2); opacity: 0; }
+      40% { opacity: 1; }
+      to { transform: scale(1.8); opacity: 0; }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding-top: 25px; }
+      .bubble { padding: 20px 18px; }
+      .buttons { gap: 12px; }
+      button { padding: 15px 32px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <section class="bubble">
+      <h2>Buenos días mi amor hermosa 💛</h2>
+    </section>
+
+    <section class="bubble">
+      <p>
+        Sé lo esforzada y trabajadora que eres todos los días.
+        Admiro cómo entregas tu energía sanando a otros como kinesióloga,
+        con tanta paciencia y corazón. 💕
+      </p>
+    </section>
+
+    <div class="heart-card">
+      <div class="heart-shape"></div>
+      <div class="heart-text">
+        Marilyn ocares<br>
+        futura mujer mía 💖
+      </div>
+    </div>
+
+    <h1 class="question">¿Me amas muchísimo? 💘</h1>
+
+    <div class="buttons">
+      <button id="yes">Sí 💖</button>
+      <button id="no">No 😳</button>
+    </div>
+
+    <div id="answer"></div>
+
+    <section class="bubble">
+      <p>
+        Hoy el mundo necesita de tus manos mágicas.
+        Ve y brilla como siempre. Yo aquí te espero con todo mi orgullo
+        y mis ganas de abrazarte al final del día. 💗
+      </p>
+    </section>
+
+  </main>
+
+  <script>
+    const answer = document.getElementById("answer");
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "floating";
+      heart.textContent = ["💖", "💕", "💗", "💘", "❤️", "💞"][Math.floor(Math.random() * 6)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "-50px";
+      heart.style.animationDuration = (4 + Math.random() * 5) + "s";
+      heart.style.fontSize = (20 + Math.random() * 35) + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+
+    function createArrow() {
+      const arrow = document.createElement("div");
+      arrow.className = "arrow";
+      arrow.textContent = "💘";
+      arrow.style.top = (10 + Math.random() * 75) + "vh";
+      arrow.style.left = "-50px";
+      arrow.style.animationDuration = (2.5 + Math.random() * 2) + "s";
+      document.body.appendChild(arrow);
+      setTimeout(() => arrow.remove(), 5000);
+    }
+
+    function createSparkle() {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.textContent = "✦";
+      sparkle.style.left = Math.random() * 100 + "vw";
+      sparkle.style.top = Math.random() * 100 + "vh";
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 2000);
+    }
+
+    // Corazones y flechas aparecen continuamente
+    setInterval(createHeart, 280);
+    setInterval(createArrow, 1400);
+    setInterval(createSparkle, 500);
+
+    yesButton.addEventListener("click", () => {
+      answer.textContent = "¡Sabía que dirías que sí! 💖💘💕";
+      for (let i = 0; i < 45; i++) {
+        setTimeout(createHeart, i * 45);
+      }
+      for (let i = 0; i < 12; i++) {
+        setTimeout(createArrow, i * 120);
+      }
+    });
+
+    // El botón "No" se mueve cuando intentan presionarlo
+    noButton.addEventListener("mouseenter", () => {
+      const x = Math.random() * 220 - 110;
+      const y = Math.random() * 120 - 60;
+      noButton.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    noButton.addEventListener("click", () => {
+      answer.textContent = "Ese botón parece que no quiere dejarse elegir 😅💗";
+      noButton.style.transform = "translate(0,0)";
+    });
+  </script>
+</body>
+</html>
+
